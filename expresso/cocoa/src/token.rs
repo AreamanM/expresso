@@ -45,6 +45,12 @@ pub enum FuncKind {
     Cos,
     /// Trignometric tangent.
     Tan,
+    /// Inverse trignometric sine.
+    Asin,
+    /// Inverse trignometric cosine.
+    Acos,
+    /// Inverse trignometric tangent.
+    Atan,
     /// Exponential function; `exp(x)` is equivalent to `e^x`.
     Exp,
     /// Natural log.
@@ -137,6 +143,9 @@ impl FuncKind {
             FuncKind::Sin => input.sin(),
             FuncKind::Cos => input.cos(),
             FuncKind::Tan => input.tan(),
+            FuncKind::Asin => input.asin(),
+            FuncKind::Acos => input.acos(),
+            FuncKind::Atan => input.atan(),
             FuncKind::Exp => input.exp(),
             FuncKind::Ln => input.ln(),
             FuncKind::Log => input.log10(),
