@@ -61,6 +61,8 @@ pub enum FuncKind {
     Ln,
     /// Log base 10.
     Log,
+    /// Square root
+    Sqrt,
 }
 
 impl OpKind {
@@ -155,6 +157,7 @@ impl FuncKind {
             FuncKind::Exp => input.exp(),
             FuncKind::Ln => input.ln(),
             FuncKind::Log => input.log10(),
+            FuncKind::Sqrt => input.sqrt(),
         }
     }
 }

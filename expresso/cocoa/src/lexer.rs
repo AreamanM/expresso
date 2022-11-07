@@ -143,6 +143,7 @@ fn lex_ident(cs: &mut Peekable<Chars>) -> Result<Token> {
         "exp" => Ok(Token::Func(FuncKind::Exp)),
         "ln" => Ok(Token::Func(FuncKind::Ln)),
         "log" => Ok(Token::Func(FuncKind::Log)),
+        "sqrt" => Ok(Token::Func(FuncKind::Sqrt)),
         // `pi` is treated as a regular floating point number
         "pi" => Ok(Token::Number(std::f64::consts::PI)),
         _ => bail!("unrecognized identifier '{}'", buf),
