@@ -138,6 +138,8 @@ fn lex_ident(cs: &mut Peekable<Chars>) -> Result<Token> {
         "asin" => Ok(Token::Func(FuncKind::Asin)),
         "acos" => Ok(Token::Func(FuncKind::Acos)),
         "atan" => Ok(Token::Func(FuncKind::Atan)),
+        "deg" => Ok(Token::Func(FuncKind::Deg)),
+        "rad" => Ok(Token::Func(FuncKind::Rad)),
         "exp" => Ok(Token::Func(FuncKind::Exp)),
         "ln" => Ok(Token::Func(FuncKind::Ln)),
         "log" => Ok(Token::Func(FuncKind::Log)),

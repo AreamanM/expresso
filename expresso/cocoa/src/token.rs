@@ -51,6 +51,10 @@ pub enum FuncKind {
     Acos,
     /// Inverse trignometric tangent.
     Atan,
+    /// A function to convert from radians to degrees.
+    Deg,
+    /// A function to convert from degrees to radians.
+    Rad,
     /// Exponential function; `exp(x)` is equivalent to `e^x`.
     Exp,
     /// Natural log.
@@ -146,6 +150,8 @@ impl FuncKind {
             FuncKind::Asin => input.asin(),
             FuncKind::Acos => input.acos(),
             FuncKind::Atan => input.atan(),
+            FuncKind::Deg => input.to_degrees(),
+            FuncKind::Rad => input.to_radians(),
             FuncKind::Exp => input.exp(),
             FuncKind::Ln => input.ln(),
             FuncKind::Log => input.log10(),
