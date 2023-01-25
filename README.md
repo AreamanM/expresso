@@ -2,8 +2,8 @@
 
 expresso is split into 2 parts:
 
-- [blend](expresso/blend): a commandline maths expression evaluator
-- [cocoa](expresso/cocoa): a tiny library for evaluating maths expressions which `blend` uses.
+- [blend](blend): a commandline maths expression evaluator
+- [cocoa](cocoa): a tiny library for evaluating maths expressions which `blend` uses.
 
 The parser is implemented using the [Pratt parsing algorithm](https://en.wikipedia.org/wiki/Operator-precedence_parser#Pratt_parsing).
 
