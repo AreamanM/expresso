@@ -15,9 +15,9 @@
 /// ```
 /// use cocoa::math::ufactorial;
 ///
-/// assert_eq!(ufactorial(0_u64), 1_u64);
-/// assert_eq!(ufactorial(5_u64), 120_u64);
-/// assert_eq!(ufactorial(7_u64), 5040_u64);
+/// assert_eq!(ufactorial(0), 1);
+/// assert_eq!(ufactorial(5), 120);
+/// assert_eq!(ufactorial(7), 5040);
 /// ```
 pub fn ufactorial(n: u64) -> u64 {
     if n == 0 {

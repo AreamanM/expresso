@@ -131,7 +131,7 @@ impl FuncKind {
     /// Evaluate the given function at `input`.
     ///
     /// The result of these functions is entirely dependant on the way floating
-    /// point arithmetic is implementedd in rust, hence a floating point
+    /// point arithmetic is implemented in rust, hence a floating point
     /// error may appear in calculations.
     ///
     /// # Arguments
