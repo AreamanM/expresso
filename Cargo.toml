@@ -4,17 +4,17 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-cocoa = { version = "0.1.0", path = "expresso/cocoa" }
+cocoa = { version = "0.1.0", path = "cocoa" }
 colored = "2"
 rustyline = "10.0.0"
 
 
 [workspace]
 members = [
-  "expresso/cocoa",
-  "expresso/blend",
+  "cocoa",
+  "blend",
 ]
 
 [[bin]]
-path = "expresso/blend/src/main.rs"
+path = "blend/src/main.rs"
 name = "expresso"
