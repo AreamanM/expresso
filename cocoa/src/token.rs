@@ -66,7 +66,7 @@ pub enum FuncKind {
 }
 
 /// All sets of tokens with associated binding powers implement `Bindable`.
-pub trait Bindable {
+pub(crate) trait Bindable {
     /// Get the binding power of `self`.
     ///
     /// The binding power is used in the pratt parsing algorithm to determine
