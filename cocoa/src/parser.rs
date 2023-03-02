@@ -7,7 +7,7 @@ use anyhow::{bail, Result};
 
 use crate::{
     math::ufactorial,
-    token::{OpKind, Token},
+    token::{OpKind, Token, Bindable},
 };
 
 /// A parser which turns an iterator over `Token`s into an output.

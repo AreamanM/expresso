@@ -65,8 +65,9 @@ pub enum FuncKind {
     Sqrt,
 }
 
-impl OpKind {
-    /// Get the binding power of an operator.
+/// All sets of tokens with associated binding powers implement `Bindable`.
+pub trait Bindable {
+    /// Get the binding power of `self`.
     ///
     /// The binding power is used in the pratt parsing algorithm to determine
     /// the precedence of an operator.
@@ -74,6 +75,14 @@ impl OpKind {
     /// The values themselves are arbitrary, however in order to enforce
     /// predence, an operator `A` with higher precedence than another operator
     /// `B` must have a higher binding power than `A`.
+    ///
+    /// The higher the binding power, the more higher the precedence of the
+    /// operator.
+    fn bp(self) -> u8;
+}
+
+impl Bindable for OpKind {
+    /// Get the binding power of an operator.
     ///
     /// Operators with the same level of precedence have the same binding power,
     /// since their respective operations can be done in any order,
@@ -97,7 +106,7 @@ impl OpKind {
     /// assert!(OpKind::Caret.bp() > OpKind::Modulo.bp());
     /// assert!(OpKind::Factorial.bp() > OpKind::Modulo.bp());
     /// ```
-    pub fn bp(self) -> u8 {
+    fn bp(self) -> u8 {
         match self {
             OpKind::Plus | OpKind::Minus => 5,
             OpKind::Star | OpKind::Slash => 10,
@@ -108,14 +117,12 @@ impl OpKind {
     }
 }
 
-impl FuncKind {
-    /// Get the binding power of a function.
+impl Bindable for FuncKind {
+    /// Gets the binding power of a function.
     ///
-    /// All functions have the same, and the highest binding power.
-    ///
-    /// Since functions have the highest binding power, an expression like
-    /// `sin(2 + 2) - 3` is parsed as `(sin(2 + 2)) - 3` rather than
-    /// `sin((2 + 2) - 3)`.
+    /// All functions have the same, and the highest binding power, hence
+    /// an expression like `sin(2 + 2) - 3` is parsed as `(sin(2 + 2)) - 3`
+    /// rather than `sin((2 + 2) - 3)`.
     ///
     /// # Examples
     /// ```
@@ -124,10 +131,12 @@ impl FuncKind {
     /// assert_eq!(FuncKind::Sin.bp(), FuncKind::Ln.bp());
     /// assert!(FuncKind::Sin.bp() > OpKind::Factorial.bp());
     /// ```
-    pub fn bp(self) -> u8 {
+    fn bp(self) -> u8 {
         35
     }
+}
 
+impl FuncKind {
     /// Evaluate the given function at `input`.
     ///
     /// The result of these functions is entirely dependant on the way floating
