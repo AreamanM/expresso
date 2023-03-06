@@ -93,9 +93,6 @@ impl Bindable for OpKind {
     /// operators, for unary plus or minus(which are both prefix operators), 15
     /// is added to the regular unary binding power for plus and minus.
     ///
-    /// The higher the binding power, the more higher the precedence of the
-    /// operator.
-    ///
     /// # Examples
     /// ```
     /// use cocoa::token::OpKind;
