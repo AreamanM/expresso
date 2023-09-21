@@ -1,7 +1,7 @@
 //! Implementation of data structures that represent expresso's input.
 
 /// A valid token expresso understands.
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum Token {
     /// A valid operator.
     Op(OpKind),
@@ -66,7 +66,7 @@ pub enum FuncKind {
 }
 
 /// All sets of tokens with associated binding powers implement `Bindable`.
-pub(crate) trait Bindable {
+pub trait Bindable {
     /// Get the binding power of `self`.
     ///
     /// The binding power is used in the pratt parsing algorithm to determine
@@ -95,8 +95,8 @@ impl Bindable for OpKind {
     ///
     /// # Examples
     /// ```
-    /// use cocoa::token::OpKind;
-    ///
+    /// use cocoa::token::{Bindable, OpKind};
+    /// 
     /// assert_eq!(OpKind::Plus.bp(), OpKind::Minus.bp());
     /// assert!(OpKind::Star.bp() > OpKind::Plus.bp());
     /// assert!(OpKind::Modulo.bp() > OpKind::Star.bp());
@@ -123,7 +123,7 @@ impl Bindable for FuncKind {
     ///
     /// # Examples
     /// ```
-    /// use cocoa::token::{OpKind, FuncKind};
+    /// use cocoa::token::{Bindable, OpKind, FuncKind};
     ///
     /// assert_eq!(FuncKind::Sin.bp(), FuncKind::Ln.bp());
     /// assert!(FuncKind::Sin.bp() > OpKind::Factorial.bp());

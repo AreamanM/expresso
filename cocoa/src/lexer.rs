@@ -32,13 +32,13 @@ use crate::token::{FuncKind, OpKind, Token};
 pub fn lex(cs: &mut Peekable<Chars>) -> Result<Vec<Token>> {
     let mut tokens = vec![];
 
-    while let Some(c) = cs.peek().copied() {
+    while let Some(&c) = cs.peek() {
         // the current implementation does not parse numbers such as '.2' to be
         // 0.2 as the leading `.` is considered as invalid
         if c.is_ascii_whitespace() {
             cs.next();
             continue;
-        } else if c.is_ascii_digit() {
+        } else if c.is_ascii_digit() || c == '.' {
             tokens.push(lex_number(cs)?);
 
             eat_whitespace(cs);
@@ -97,7 +97,18 @@ fn lex_number(cs: &mut Peekable<Chars>) -> Result<Token> {
     let mut dot = false;
     let mut buf = String::new();
 
-    while let Some(c) = cs.peek().copied() {
+    // insert a 0 in the buffer is the number being parsed is a decimal
+    // beginning with a '.'
+    //
+    // the `parse` function that will parse the buf into an f64 is not happy if
+    // the buf begins with a '.' as opposed to '0.'
+    if let Some(&c) = cs.peek() {
+        if c == '.' {
+            buf.push('0');
+        }
+    }
+
+    while let Some(&c) = cs.peek() {
         if c.is_ascii_digit() || c == '.' {
             if c == '.' {
                 if !dot {
@@ -122,7 +133,7 @@ fn lex_number(cs: &mut Peekable<Chars>) -> Result<Token> {
 fn lex_ident(cs: &mut Peekable<Chars>) -> Result<Token> {
     let mut buf = String::new();
 
-    while let Some(c) = cs.peek().copied() {
+    while let Some(&c) = cs.peek() {
         if c.is_ascii_alphabetic() {
             buf.push(c);
             cs.next();

@@ -43,15 +43,13 @@ pub fn parse<I: Iterator<Item = Token>>(
     tokens: &mut Peekable<I>,
     bp: u8,
 ) -> Result<f64>
-where
-    I: Clone,
 {
     let mut lhs = match tokens.next() {
         Some(t) => match t {
             Token::Number(n) => n,
             Token::Func(f) => {
                 // not the best but it gets the job done
-                if tokens.clone().next() != Some(Token::LParen) {
+                if tokens.next() != Some(Token::LParen) {
                     bail!("expected '(' after token '{:?}'", f)
                 }
 
@@ -88,10 +86,7 @@ where
     };
 
     loop {
-        // fighting the borrow checker is not ideal, but it works for now
-        let mut t = tokens.clone();
-
-        let op = match t.peek() {
+        let &op = match tokens.peek() {
             Some(Token::Op(o)) => o,
             // an issue with this approach is that expressions such as
             // 2 + 3(4))))) are valid as the extra RParens are simply consumed
