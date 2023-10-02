@@ -7,7 +7,7 @@ use anyhow::{bail, Result};
 
 use crate::{
     math::ufactorial,
-    token::{OpKind, Token, Bindable},
+    token::{Bindable, OpKind, Token},
 };
 
 /// A parser which turns an iterator over `Token`s into an output.
@@ -42,8 +42,7 @@ use crate::{
 pub fn parse<I: Iterator<Item = Token>>(
     tokens: &mut Peekable<I>,
     bp: u8,
-) -> Result<f64>
-{
+) -> Result<f64> {
     let mut lhs = match tokens.next() {
         Some(t) => match t {
             Token::Number(n) => n,

@@ -96,7 +96,7 @@ impl Bindable for OpKind {
     /// # Examples
     /// ```
     /// use cocoa::token::{Bindable, OpKind};
-    /// 
+    ///
     /// assert_eq!(OpKind::Plus.bp(), OpKind::Minus.bp());
     /// assert!(OpKind::Star.bp() > OpKind::Plus.bp());
     /// assert!(OpKind::Modulo.bp() > OpKind::Star.bp());

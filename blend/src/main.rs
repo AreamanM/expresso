@@ -1,6 +1,6 @@
+use colored::*;
 use rustyline::error::ReadlineError;
 use rustyline::Editor;
-use colored::*;
 
 use cocoa::{lexer::lex, parser::parse};
 
@@ -9,10 +9,12 @@ fn main() {
 }
 
 fn repl() {
-    println!(r#"expresso REPL v0.1.0
+    println!(
+        r#"expresso REPL v0.1.0
 
 Enter expressions to see their answer or press Ctrl-d to quit.
-"#);
+"#
+    );
 
     let mut rl = match Editor::<()>::new() {
         Ok(editor) => editor,
