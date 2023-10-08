@@ -38,25 +38,9 @@ pub fn lex(cs: &mut Peekable<Chars>) -> Result<Vec<Token>> {
         if c.is_ascii_whitespace() {
             cs.next();
             continue;
-        } else if c.is_ascii_digit() || c == '.' {
+        }
+        else if c.is_ascii_digit() || c == '.' {
             tokens.push(lex_number(cs)?);
-
-            eat_whitespace(cs);
-            // if the next non-whitespace character is the start of a new
-            // identifier or a left bracket, a star sign is added before the
-            // next token
-            //
-            // this hack allows expressions like 2(3), which the parser would
-            // consider invalid to be lexed as 2*(3) which is valid
-            //
-            // however, this does lead to some odd results, for example 2pi/2pi
-            // which would be expected to equal 1 is parsed as as 2*pi/2*pi
-            // which equals pi^2
-            match cs.peek() {
-                Some('(') | Some('s') | Some('c') | Some('t') | Some('e')
-                | Some('p') | Some('l') => tokens.push(Token::Op(OpKind::Star)),
-                _ => (),
-            }
         } else if c.is_ascii_alphabetic() {
             tokens.push(lex_ident(cs)?);
         } else {
@@ -66,16 +50,6 @@ pub fn lex(cs: &mut Peekable<Chars>) -> Result<Vec<Token>> {
     }
 
     Ok(tokens)
-}
-
-fn eat_whitespace(cs: &mut Peekable<Chars>) {
-    while let Some(c) = cs.peek() {
-        if c.is_ascii_whitespace() {
-            cs.next();
-        } else {
-            break;
-        }
-    }
 }
 
 fn lex_op(c: char) -> Result<Token> {
