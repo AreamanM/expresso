@@ -33,8 +33,6 @@ pub fn lex(cs: &mut Peekable<Chars>) -> Result<Vec<Token>> {
     let mut tokens = vec![];
 
     while let Some(&c) = cs.peek() {
-        // the current implementation does not parse numbers such as '.2' to be
-        // 0.2 as the leading `.` is considered as invalid
         if c.is_ascii_whitespace() {
             cs.next();
             continue;
