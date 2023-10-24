@@ -88,7 +88,7 @@ pub fn parse<I: Iterator<Item = Token>>(
         let &op = match tokens.peek() {
             Some(Token::Op(o)) => o,
             // an issue with this approach is that expressions such as
-            // 2 + 3(4))))) are valid as the extra RParens are simply consumed
+            // `(2 + 3)))) * 4` are valid as the extra RParens are simply consumed
             //
             // the ideal solution is a stack to keep track of delimeters
             Some(Token::RParen) => break,
